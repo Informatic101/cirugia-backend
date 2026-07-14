@@ -113,6 +113,13 @@ io.on('connection', (socket) => {
       isHost: room.hostId === playerId
     });
 
+    socket.emit('room_joined', {
+      roomCode,
+      players: sanitizePlayers(room.players),
+      hostId: room.hostId,
+      isHost: room.hostId === playerId
+    });
+
     io.to(roomCode).emit('player_joined', {
       players: sanitizePlayers(room.players),
       hostId: room.hostId
